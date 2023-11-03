@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  userID               Int                             @id @default(autoincrement())
+  userName             String?                         @db.VarChar(255)
+  userPass             String?                         @db.VarChar(200)
+  firstName            String?                         @db.VarChar(255)
+  lastName             String?                         @db.VarChar(50)
+  address              String?                         @db.VarChar(255)
+  userEmail            String?                         @unique @db.VarChar(255)
+  userPhone            String?                         @db.VarChar(255)                            
+  userType             Int?
+  create_date          Int?                           
+  updatedAt            DateTime                       @updatedAt
+  userStatus           String?
+  tokenCode            String?                         @db.VarChar(100)
+  image                String?                         @default("default.png")
+  creator              String?                         @db.VarChar(250)
+  created              String?                         @db.VarChar(250)
+  zone_divisions       String?                         @db.VarChar(250)
+  zone_districts       String?                         @db.VarChar(250)
+  zone_upazilas        String?                         @db.VarChar(250)
+  
+}
+
+model Category {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique @db.VarChar(255)
+  slug     String   @db.VarChar(255)
+  image    String?  @default("default.png")
+  subcategories Subcategory[]
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
+
+model Subcategory {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  slug       String   @db.VarChar(255)
+  image      String?    @default("default.png")
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
+
+model Slider {
+  id       Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  text     String   @db.VarChar(255)
+  slug     String   @db.VarChar(255)
+  image    String?  @default("default.png")
+  status    String
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
+
+model Brand {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique @db.VarChar(255)
+  slug     String   @db.VarChar(255)
+  image    String?  @default("default.png")
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
+
+model Shop {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique @db.VarChar(255)
+  slug     String   @db.VarChar(255)
+  image    String?  @default("default.png")
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
+
+model Product {
+  id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(255)
+  description       String   @db.VarChar(500)
+  regular_price     Int      @db.Int
+  sale_price        Int      @db.Int
+  coupon_discount   Int      @db.Int
+  coupon     String   @db.VarChar(255)
+  quntity     Int   @db.Int
+  active_status     String   @db.VarChar(255)
+  category     String   @db.VarChar(255)
+  subcategory     String   @db.VarChar(255)
+  brand     String   @db.VarChar(255)
+  shop     String   @db.VarChar(255)
+  new_arrival     String   @db.VarChar(255)
+  video     String   @db.VarChar(600)
+  selling_record     Int   @db.Int
+  slug     String   @db.VarChar(255)
+  image    String?  @default("default.png")
+  create_date          DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt @default(now())
+}
