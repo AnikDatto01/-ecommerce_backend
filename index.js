@@ -9,7 +9,7 @@ const path  =require( "path");
 
 require('dotenv').config()
 const app = express()
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'http://www.anikdutta.live' }));
 //regular middelware
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
