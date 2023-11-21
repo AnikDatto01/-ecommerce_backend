@@ -8,8 +8,14 @@ const path  =require( "path");
 
 
 require('dotenv').config()
+
 const app = express()
-app.use(cors({ origin: 'http://www.anikdutta.live' }));
+const allowedOrigins = [
+  'http://www.anikdutta.live',
+  'http://anikdutta.live',
+  'http://localhost:3000'
+];
+app.use(cors({ origin: allowedOrigins }));
 //regular middelware
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -57,3 +63,4 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
