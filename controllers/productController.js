@@ -128,12 +128,12 @@ exports.getAllProducts = async (req, res, next) => {
 
 exports.getProductBySlug = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const productId = parseInt(id);
+    const { slug } = req.params;
+    // const productId = parseInt(id);
 
     const product = await prisma.product.findUnique({
       where: {
-        id: productId,
+        slug: slug,
       },
     });
 
