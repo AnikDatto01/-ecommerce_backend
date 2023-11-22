@@ -135,18 +135,6 @@ exports.getProductById = async (req, res, next) => {
       where: {
         id: productId,
       },
-      include: {
-        brand: {
-          where: {
-            id: parseInt(product.brand), // Specify the brand ID you want
-          },
-          select: {
-            id: true,
-            name: true,
-            // Add other brand properties you want to include
-          },
-        },
-      },
     });
 
     if (!product) {
@@ -156,9 +144,17 @@ exports.getProductById = async (req, res, next) => {
       });
     }
 
+    const brand = await prisma.brand.findUnique({
+      where: {
+        id: parseInt(product.brand), // Specify the brand ID you want
+      },
+      
+    });
+
     res.json({
       success: true,
       product,
+      brand,
     });
   } catch (error) {
     console.error(error);
