@@ -135,6 +135,10 @@ exports.getProductById = async (req, res, next) => {
       where: {
         id: productId,
       },
+      select: {
+        brand: false,
+        // Add other brand properties you want to include
+      },
     });
 
     if (!product) {
