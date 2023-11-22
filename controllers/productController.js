@@ -124,3 +124,36 @@ exports.getAllProducts = async (req, res, next) => {
   const product = await prisma.product.findMany()
   res.json(product);
 };
+
+
+exports.getProductBySlug = async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+
+    const product = await prisma.product.findUnique({
+      where: {
+        slug: slug,
+      },
+    });
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      product,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error retrieving product",
+      error: error.message,
+    });
+  }
+};
+
