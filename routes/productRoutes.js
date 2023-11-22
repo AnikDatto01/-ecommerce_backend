@@ -2,7 +2,7 @@ const expires =require("express")
 
 const router = expires.Router()
 
-const {createproduct,getAllProduct,getAllProducts,getProductBySlug} = require('../controllers/productController')
+const {createproduct,getAllProduct,getAllProducts,getProductById} = require('../controllers/productController')
 
 router.route('/createproduct').post(createproduct)
 
