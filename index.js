@@ -12,8 +12,12 @@ require('dotenv').config()
 const app = express()
 const allowedOrigins = [
   'http://www.anikdutta.live',
+  'https://www.anikdutta.live',
   'http://anikdutta.live',
-  'http://localhost:3000'
+  'https://anikdutta.live',
+  'http://localhost:3000',
+  'http://ecommerce.starsolutions-bd.com',
+  'https://ecommerce.starsolutions-bd.com'
 ];
 app.use(cors({ origin: allowedOrigins }));
 //regular middelware
