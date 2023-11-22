@@ -10,6 +10,6 @@ router.route('/getAllProduct').get(getAllProduct)
 
 router.route('/getAllProducts').get(getAllProducts)
 
-router.route('/getProductBySlug/:id').get(getProductBySlug);
+router.route('/getProductById/:id').get(getProductById);
 
 module.exports = router

@@ -126,7 +126,7 @@ exports.getAllProducts = async (req, res, next) => {
 };
 
 
-exports.getProductBySlug = async (req, res, next) => {
+exports.getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const productId = parseInt(id);
